@@ -12,15 +12,19 @@
 } 
 else
 {
-  @* <ul>
+  <ul>
     @foreach (Item item in Model)
     {
-      <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name | @item.JoinEntities[0].Tag.Title</li>
+      <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name | 
+        @if(item.JoinEntities != null && item.JoinEntities.Count > 0)
+        {
+          @item.JoinEntities[0].Tag?.Title
+        }
+        </li>
     }
-  </ul> *@<p>
-@Html.ActionLink($"{Model[0].Description}", "Details", new { id = Model[0].ItemId }) | @Model[0].Category.Name | @Model[0].JoinEntities[0].Tag.Title</p>
-
+  </ul> 
 }
+
 
 <p>@Html.ActionLink("Add new item", "Create")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
