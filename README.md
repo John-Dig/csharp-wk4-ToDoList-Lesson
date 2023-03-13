@@ -1,4 +1,5 @@
 ## What Is This?
+--adding brent and chris to this project
 
 This is an example repo corresponding to multiple lessons within the LearnHowToProgram.com walkthrough on creating a To Do List application in [Section 4: Many-to-Many Relationships](https://www.learnhowtoprogram.com/c-and-net/many-to-many-relationships).
 
