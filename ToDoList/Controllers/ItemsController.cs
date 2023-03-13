@@ -20,6 +20,8 @@ namespace ToDoList.Controllers
     {
       List<Item> model = _db.Items
                             .Include(item => item.Category)
+                            .Include(item => item.JoinEntities)
+                         .ThenInclude(join => join.Tag)
                             .ToList();
       return View(model);
     }
