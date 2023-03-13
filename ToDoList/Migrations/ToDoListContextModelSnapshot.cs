@@ -8,129 +8,129 @@ using ToDoList.Models;
 
 namespace ToDoList.Migrations
 {
-    [DbContext(typeof(ToDoListContext))]
-    partial class ToDoListContextModelSnapshot : ModelSnapshot
+  [DbContext(typeof(ToDoListContext))]
+  partial class ToDoListContextModelSnapshot : ModelSnapshot
+  {
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 64);
+      modelBuilder
+          .HasAnnotation("ProductVersion", "7.0.3")
+          .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("ToDoList.Models.Category", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+      modelBuilder.Entity("ToDoList.Models.Category", b =>
+          {
+            b.Property<int>("CategoryId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext");
+            b.Property<string>("Name")
+                      .HasColumnType("longtext");
 
-                    b.HasKey("CategoryId");
+            b.HasKey("CategoryId");
 
-                    b.ToTable("Categories");
-                });
+            b.ToTable("Categories");
+          });
 
-            modelBuilder.Entity("ToDoList.Models.Item", b =>
-                {
-                    b.Property<int>("ItemId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+      modelBuilder.Entity("ToDoList.Models.Item", b =>
+          {
+            b.Property<int>("ItemId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+            b.Property<int>("CategoryId")
+                      .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("longtext");
+            b.Property<string>("Description")
+                      .HasColumnType("longtext");
 
-                    b.HasKey("ItemId");
+            b.HasKey("ItemId");
 
-                    b.HasIndex("CategoryId");
+            b.HasIndex("CategoryId");
 
-                    b.ToTable("Items");
-                });
+            b.ToTable("Items");
+          });
 
-            modelBuilder.Entity("ToDoList.Models.ItemTag", b =>
-                {
-                    b.Property<int>("ItemTagId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+      modelBuilder.Entity("ToDoList.Models.ItemTag", b =>
+          {
+            b.Property<int>("ItemTagId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
+            b.Property<int>("ItemId")
+                      .HasColumnType("int");
 
-                    b.Property<int>("TagId")
-                        .HasColumnType("int");
+            b.Property<int>("TagId")
+                      .HasColumnType("int");
 
-                    b.HasKey("ItemTagId");
+            b.HasKey("ItemTagId");
 
-                    b.HasIndex("ItemId");
+            b.HasIndex("ItemId");
 
-                    b.HasIndex("TagId");
+            b.HasIndex("TagId");
 
-                    b.ToTable("ItemTags");
-                });
+            b.ToTable("ItemTags");
+          });
 
-            modelBuilder.Entity("ToDoList.Models.Tag", b =>
-                {
-                    b.Property<int>("TagId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+      modelBuilder.Entity("ToDoList.Models.Tag", b =>
+          {
+            b.Property<int>("TagId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("longtext");
+            b.Property<string>("Title")
+                      .HasColumnType("longtext");
 
-                    b.HasKey("TagId");
+            b.HasKey("TagId");
 
-                    b.ToTable("Tags");
-                });
+            b.ToTable("Tags");
+          });
 
-            modelBuilder.Entity("ToDoList.Models.Item", b =>
-                {
-                    b.HasOne("ToDoList.Models.Category", "Category")
-                        .WithMany("Items")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("ToDoList.Models.Item", b =>
+          {
+            b.HasOne("ToDoList.Models.Category", "Category")
+                      .WithMany("Items")
+                      .HasForeignKey("CategoryId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("Category");
-                });
+            b.Navigation("Category");
+          });
 
-            modelBuilder.Entity("ToDoList.Models.ItemTag", b =>
-                {
-                    b.HasOne("ToDoList.Models.Item", "Item")
-                        .WithMany("JoinEntities")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+      modelBuilder.Entity("ToDoList.Models.ItemTag", b =>
+          {
+            b.HasOne("ToDoList.Models.Item", "Item")
+                      .WithMany("JoinEntities")
+                      .HasForeignKey("ItemId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("ToDoList.Models.Tag", "Tag")
-                        .WithMany("JoinEntities")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("ToDoList.Models.Tag", "Tag")
+                      .WithMany("JoinEntities")
+                      .HasForeignKey("TagId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Navigation("Item");
+            b.Navigation("Item");
 
-                    b.Navigation("Tag");
-                });
+            b.Navigation("Tag");
+          });
 
-            modelBuilder.Entity("ToDoList.Models.Category", b =>
-                {
-                    b.Navigation("Items");
-                });
+      modelBuilder.Entity("ToDoList.Models.Category", b =>
+          {
+            b.Navigation("Items");
+          });
 
-            modelBuilder.Entity("ToDoList.Models.Item", b =>
-                {
-                    b.Navigation("JoinEntities");
-                });
+      modelBuilder.Entity("ToDoList.Models.Item", b =>
+          {
+            b.Navigation("JoinEntities");
+          });
 
-            modelBuilder.Entity("ToDoList.Models.Tag", b =>
-                {
-                    b.Navigation("JoinEntities");
-                });
+      modelBuilder.Entity("ToDoList.Models.Tag", b =>
+          {
+            b.Navigation("JoinEntities");
+          });
 #pragma warning restore 612, 618
-        }
     }
+  }
 }
