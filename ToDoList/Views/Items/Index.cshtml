@@ -10,21 +10,29 @@
 {
   <h3>No items have been added yet!</h3>
 } 
+
 else
 {
   <ul>
     @foreach (Item item in Model)
     {
-      <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name | 
-        @if(item.JoinEntities != null && item.JoinEntities.Count > 0)
+      string tags = "";
+      @if(@item.JoinEntities.Count != 0)
         {
-          @item.JoinEntities[0].Tag?.Title
+          List<string> tagList = new List<string>();
+          @foreach(ItemTag join in item.JoinEntities)
+          {
+            tagList.Add(join.Tag.Title);
+          }
+          tags = String.Join(", ", tagList);
         }
-        </li>
+      <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name | Tags: @tags
+      </li>
     }
-  </ul> 
+  </ul>
 }
-
 
 <p>@Html.ActionLink("Add new item", "Create")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
+
+@* | @item.JoinEntities[0].Tag.Title *@
