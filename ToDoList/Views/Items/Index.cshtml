@@ -9,24 +9,29 @@
 @if (@Model.Count == 0)
 {
   <h3>No items have been added yet!</h3>
-} 
+}
 
 else
 {
   <ul>
-    @foreach (Item item in Model)
+  @foreach (Item item in Model)
     {
       string tags = "";
-      @if(@item.JoinEntities.Count != 0)
+      @if (@item.JoinEntities.Count != 0)
+      {
+        List<string> tagList = new List<string>();
+        @foreach (ItemTag join in item.JoinEntities)
         {
-          List<string> tagList = new List<string>();
-          @foreach(ItemTag join in item.JoinEntities)
-          {
-            tagList.Add(join.Tag.Title);
-          }
-          tags = String.Join(", ", tagList);
+          tagList.Add(join.Tag.Title);
         }
-      <li>@Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name | Tags: @tags
+        tags = String.Join(", ", tagList);
+      }
+      <li>
+
+        @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name | Tags: @tags @using (Html.BeginForm())
+          {
+            <input type="submit" value=@item.Description />
+          }
       </li>
     }
   </ul>
@@ -34,5 +39,3 @@ else
 
 <p>@Html.ActionLink("Add new item", "Create")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
-
-@* | @item.JoinEntities[0].Tag.Title *@
