@@ -17,6 +17,10 @@
   @Html.LabelFor(model => model.Category)
   @Html.DropDownList("CategoryId")
 
+  @Html.LabelFor(model => model.Priority)
+  @Html.DropDownList("Levels")
   <input type="submit" value="Add new item" class="btn btn-default" />
 }
 <p>@Html.ActionLink("Show all items", "Index")</p>
+
+IHtmlContent IHtmlHelper.DropDownList(string expression, IEnumerable<SelectListItem> selectList)

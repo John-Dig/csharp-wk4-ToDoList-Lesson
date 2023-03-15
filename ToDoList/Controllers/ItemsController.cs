@@ -21,7 +21,9 @@ namespace ToDoList.Controllers
       List<Item> model = _db.Items
                             .Include(item => item.Category)
                             .Include(item => item.JoinEntities)
-                         .ThenInclude(join => join.Tag)
+                            .ThenInclude(join => join.Tag)
+                            .OrderByDescending(element => element.Priority)
+                            .ThenBy(element => element.ItemId)
                             .ToList();
       return View(model);
     }
@@ -29,6 +31,11 @@ namespace ToDoList.Controllers
     public ActionResult Create()
     {
       ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
+      List<SelectListItem> PriorityLevels = new List<SelectListItem>();
+      PriorityLevels.Add(new SelectListItem { Text = "High", Value = "3"});
+      PriorityLevels.Add(new SelectListItem { Text = "Medium", Value = "2"});
+      PriorityLevels.Add(new SelectListItem { Text = "Low", Value = "1"});
+      ViewBag.Levels = PriorityLevels;
       return View();
     }
 

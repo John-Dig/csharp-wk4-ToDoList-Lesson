@@ -28,10 +28,7 @@ else
       }
       <li>
 
-        @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name | Tags: @tags @using (Html.BeginForm())
-          {
-            <input type="submit" value=@item.Description />
-          }
+        @Html.ActionLink($"{item.Description}", "Details", new { id = item.ItemId }) | @item.Category.Name | Tags: @tags 
       </li>
     }
   </ul>
